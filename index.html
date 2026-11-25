@@ -1,0 +1,1356 @@
+HTML
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA FLOWERS — Luxury Floral Studio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: rgba(244, 243, 239, 0.85);
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --primary-color: #2c2c2c;
+      --secondary-green: #7a8b6e;
+      --text-main: #4a4a4a;
+      --accent-promo: #d9534f;
+      --whatsapp-color: #25d366;
+      --vine-color: #d1d8cb;
+      --vine-glow: #eef2eb;
+    }
+
+    [data-theme="default"] { --primary-color: #2c2c2c; --vine-color: #d1d8cb; --vine-glow: #eef2eb; }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      transition: background-color 0.4s ease;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Фоновое видео */
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(244, 243, 239, 0.78);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* === БОКОВЫЕ ВЕТВИ === */
+    .side-branch-container {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 420px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .side-branch-left { left: 15px; }
+    .side-branch-right { right: 15px; }
+
+    .branch-swaying-group {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform-origin: top center;
+      animation: branchSway 6s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes branchSway {
+      0% { transform: rotate(-1deg); }
+      100% { transform: rotate(1deg); }
+    }
+
+    /* Висящие плакаты */
+    .hanging-shop-sign {
+      position: absolute;
+      width: 370px;
+      background: rgba(253, 251, 247, 0.98);
+      border: 3px solid var(--secondary-green);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 15px 45px rgba(0,0,0,0.22);
+      pointer-events: auto;
+      transform-origin: top center;
+      animation: shopSignSwing 4s ease-in-out infinite alternate;
+      backdrop-filter: blur(6px);
+      z-index: 5;
+    }
+
+    .hanging-shop-sign.sign-left-top { left: 25px; top: 120px; }
+    .hanging-shop-sign.sign-left-bottom { left: 25px; top: 440px; animation-delay: -2s; border-color: var(--accent-promo); }
+    
+    /* Рекламный блок снизу слева под гортензиями */
+    .left-ads-banner {
+      position: absolute;
+      left: 25px;
+      top: 760px;
+      width: 370px;
+      background: linear-gradient(135deg, rgba(122, 139, 110, 0.95), rgba(44, 44, 44, 0.95));
+      color: white;
+      border-radius: 12px;
+      padding: 15px 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      pointer-events: auto;
+      z-index: 5;
+      backdrop-filter: blur(6px);
+      border: 2px solid #fff;
+    }
+    .left-ads-banner h4 {
+      margin: 0 0 5px 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+    .left-ads-banner p {
+      margin: 0 0 10px 0;
+      font-size: 0.8rem;
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+    .ads-btn {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .ads-btn:hover { background: #f0f0f0; }
+
+    .hanging-shop-sign.sign-right-top { right: 25px; top: 120px; border-color: var(--accent-promo); }
+    .hanging-shop-sign.sign-right-bottom { right: 25px; top: 500px; animation-delay: -2s; }
+
+    @keyframes shopSignSwing {
+      0% { transform: rotate(1deg); }
+      100% { transform: rotate(-1deg); }
+    }
+
+    .hanging-shop-sign img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      cursor: pointer;
+    }
+
+    .sign-caption {
+      margin-top: 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--primary-color);
+      text-transform: uppercase;
+    }
+
+    .discount-caption {
+      color: var(--accent-promo);
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .sign-discount-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--accent-promo);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(217, 83, 79, 0.4);
+    }
+
+    /* === НАВИГАЦИЯ С КАТАЛОГОМ === */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 40px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .nav-left-group {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .catalog-dropdown-wrapper {
+      position: relative;
+    }
+
+    .catalog-btn {
+      background: var(--secondary-green);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+
+    .catalog-btn:hover { opacity: 0.9; }
+
+    .catalog-mega-menu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background: white;
+      width: 320px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      border-radius: 10px;
+      padding: 15px 0;
+      z-index: 300;
+      border: 1px solid #eaeaea;
+    }
+
+    .catalog-dropdown-wrapper:hover .catalog-mega-menu {
+      display: block;
+    }
+
+    .catalog-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 20px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .catalog-item:hover {
+      background: #f8f5f0;
+      color: var(--secondary-green);
+    }
+
+    .nav-menu-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .dropdown {
+      position: relative;
+      cursor: pointer;
+      padding: 10px 0;
+    }
+
+    .dropdown-toggle {
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .dropdown:hover .dropdown-toggle,
+    .nav-link-item:hover {
+      color: var(--secondary-green);
+    }
+
+    .nav-link-item {
+      color: var(--text-main);
+      text-decoration: none;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      border-radius: 8px;
+      padding: 10px 0;
+      min-width: 260px;
+      z-index: 200;
+      border: 1px solid #eaeaea;
+    }
+
+    .dropdown:hover .dropdown-menu { display: block; }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 20px;
+      color: #555;
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f8f5f0;
+      color: var(--secondary-green);
+    }
+
+    .nav-right-area {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .nav-contacts-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .nav-phone {
+      font-weight: 700;
+      color: var(--secondary-green);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+    }
+    .nav-phone:hover { opacity: 0.8; }
+
+    .nav-whatsapp-link {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: var(--whatsapp-color);
+      padding: 3px 8px;
+      border-radius: 12px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: opacity 0.2s;
+    }
+    .nav-whatsapp-link:hover { opacity: 0.9; }
+
+    .shop-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .action-icon-btn {
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 5px;
+      color: var(--text-main);
+      transition: color 0.3s;
+    }
+
+    .action-icon-btn:hover { color: var(--secondary-green); }
+
+    .badge-count {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--accent-promo);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* === БРЕНДИНГ И ШАПКА === */
+    .hero {
+      text-align: center;
+      padding: 40px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-brand-block {
+      max-width: 900px;
+      margin-bottom: 25px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      color: #282828;
+      font-size: 4.8rem;
+      letter-spacing: 12px;
+      margin: 0 0 10px 12px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--secondary-green);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      margin: 0 0 8px 5px;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #555;
+      margin: 0;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    /* Преимущества */
+    .features-bar {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(4px);
+    }
+
+    .feature-item::before {
+      content: "✓";
+      color: var(--secondary-green);
+      font-weight: bold;
+    }
+
+    /* Портфолио / Каталог букетов */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      max-width: 1350px;
+      margin: 0 auto 60px;
+      padding: 0 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(6px);
+      position: relative;
+    }
+
+    .project-card:hover { 
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .promo-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--accent-promo);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(217, 83, 79, 0.4);
+    }
+
+    .card-fav-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .card-fav-btn:hover { transform: scale(1.1); background: #fff; }
+    .card-fav-btn.active { color: var(--accent-promo); }
+
+    .project-img-wrapper {
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      background-color: #eee;
+      position: relative;
+    }
+
+    .project-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .project-img-wrapper img { transform: scale(1.04); }
+
+    .project-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.6;
+      margin: 0 0 15px;
+      flex-grow: 1;
+    }
+
+    .project-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .project-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--secondary-green);
+    }
+
+    .buy-btn {
+      background: var(--secondary-green);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .buy-btn:hover { opacity: 0.9; }
+
+    /* Блок выбора оплаты */
+    .payment-options {
+      margin: 15px 0;
+      background: #f8f5f0;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #e2ddd5;
+    }
+    .payment-options h4 {
+      margin: 0 0 8px 0;
+      font-size: 0.95rem;
+      color: var(--primary-color);
+    }
+    .payment-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      margin: 6px 0;
+      cursor: pointer;
+    }
+
+    /* Модальные окна */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 90%;
+      max-height: 92vh;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 16px;
+      position: relative;
+    }
+
+    .lightbox-content img {
+      width: 100%;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #fcfbfa;
+    }
+
+    .lightbox-caption {
+      text-align: center;
+      margin-top: 15px;
+      color: #333;
+    }
+
+    .lightbox-caption h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin: 0 0 5px;
+      font-weight: 700;
+    }
+
+    .lightbox-caption p {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 10px; right: 20px;
+      color: #333;
+      font-size: 35px;
+      cursor: pointer;
+      z-index: 2200;
+    }
+
+    .lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+      border: none;
+      font-size: 28px;
+      padding: 15px 20px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 2100;
+    }
+
+    .lightbox-arrow:hover { background: var(--secondary-green); }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+
+    .custom-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 3000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .custom-modal-box {
+      background: white;
+      padding: 30px;
+      border-radius: 14px;
+      width: 480px;
+      max-width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    .custom-modal-box h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    .custom-modal-box img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin: 10px 0 15px;
+      background-color: #f9f9f9;
+      display: none;
+    }
+
+    .custom-modal-box input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-size: 0.95rem;
+    }
+
+    .custom-modal-box button.submit-btn {
+      width: 100%;
+      background: var(--secondary-green);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .custom-modal-box button.submit-btn:hover { opacity: 0.9; }
+
+    .modal-close-x {
+      position: absolute;
+      top: 15px; right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #777;
+    }
+
+    .cart-list-item, .fav-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-item-info img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .remove-item-btn {
+      background: none;
+      border: none;
+      color: var(--accent-promo);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 5px;
+    }
+    .remove-item-btn:hover { opacity: 0.8; }
+
+    .cart-total {
+      margin-top: 15px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: right;
+      color: var(--primary-color);
+    }
+
+    footer {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 30px;
+      text-align: center;
+      border-top: 1px solid #eaeaea;
+      font-size: 0.9rem;
+      color: #666;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(6px);
+    }
+
+    footer p { margin: 5px 0; }
+
+    @media (max-width: 1750px) { 
+      .side-branch-container { display: none; }
+    }
+    @media (max-width: 1100px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.8rem; letter-spacing: 4px; }
+      .hero-subtitle { font-size: 0.85rem; letter-spacing: 2px; }
+      .nav-menu-links { display: none; }
+    }
+  </style>
+
+  <script>
+    function handleImageError(img) {
+      if (img.dataset.tried) return;
+      img.dataset.tried = "true";
+      if (img.src.includes('фоото 2.jpg')) {
+        img.src = 'фоото 2.jpg';
+      }
+    }
+  </script>
+</head>
+<body data-theme="default">
+
+  <!-- Фоновое видео -->
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="bg-video.mp4" type="video/mp4">
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- ЛЕВОЕ ДЕРЕВО (Витрины слева + Реклама снизу) -->
+  <div class="side-branch-container side-branch-left">
+    <div class="branch-swaying-group">
+      <svg viewBox="0 0 200 1000" preserveAspectRatio="none" width="100%" height="100%">
+        <path d="M 200 0 C 150 200, 0 350, 40 550 C 70 700, 20 850, 180 1000 L 200 1000 Z" fill="var(--vine-color)" opacity="0.85" />
+        <path d="M 180 50 C 100 250, 20 400, 60 600 C 90 750, 40 900, 160 1000 Z" fill="var(--vine-glow)" opacity="0.6" />
+        <circle cx="100" cy="120" r="60" fill="var(--vine-color)" opacity="0.9" />
+        <circle cx="50" cy="260" r="65" fill="var(--vine-color)" opacity="0.85" />
+      </svg>
+    </div>
+    
+    <div class="hanging-shop-sign sign-left-top">
+      <img src="фото1.jpg" onerror="handleImageError(this)" alt="Эустомы" onclick="openLightboxBySrc('фото1.jpg', 'Эустомы', 'Роскошный объемный монобукет из нежнейших эустом')">
+      <div class="sign-caption">Эустомы</div>
+    </div>
+
+    <div class="hanging-shop-sign sign-left-bottom">
+      <div class="sign-discount-badge">%</div>
+      <img src="фоото 2.jpg" onerror="handleImageError(this)" alt="Гортензии" onclick="openLightboxBySrc('фоото 2.jpg', 'Гортензии (СКИДКА)', 'Пышные гортензии в сочетании с яркими розами по акционной цене!')">
+      <div class="sign-caption discount-caption">Гортензии 🔥</div>
+    </div>
+
+    <div class="left-ads-banner">
+      <h4>✨ Спецпредложение</h4>
+      <p>Бесплатная открытка и фотоотчет перед отправкой каждого заказа!</p>
+      <button class="ads-btn" onclick="showInfo('Специальная акция', 'При заказе от 20 000 ₸ доставка по Алматы и Талдыкоргану бесплатная!')">Узнать больше</button>
+    </div>
+  </div>
+
+  <!-- ПРАВОЕ ДЕРЕВО -->
+  <div class="side-branch-container side-branch-right">
+    <div class="branch-swaying-group" style="animation-delay: -3s;">
+      <svg viewBox="0 0 200 1000" preserveAspectRatio="none" width="100%" height="100%">
+        <path d="M 200 0 C 150 200, 0 350, 40 550 C 70 700, 20 850, 180 1000 L 200 1000 Z" fill="var(--vine-color)" opacity="0.85" />
+        <path d="M 180 50 C 100 250, 20 400, 60 600 C 90 750, 40 900, 160 1000 Z" fill="var(--vine-glow)" opacity="0.6" />
+        <circle cx="100" cy="120" r="60" fill="var(--vine-color)" opacity="0.9" />
+        <circle cx="50" cy="260" r="65" fill="var(--vine-color)" opacity="0.85" />
+      </svg>
+    </div>
+
+    <div class="hanging-shop-sign sign-right-top">
+      <div class="sign-discount-badge">-20%</div>
+      <img src="08c1955d-c808-4d45-8294-04cb471429aa.jpg" onerror="handleImageError(this)" alt="Клубника в шоколаде" onclick="openLightboxBySrc('08c1955d-c808-4d45-8294-04cb471429aa.jpg', 'Премиум Бокс (СКИДКА)', 'Изысканная клубника в бельгийском шоколаде со скидкой!')">
+      <div class="sign-caption discount-caption">АКЦИЯ -20% 🔥</div>
+    </div>
+
+    <div class="hanging-shop-sign sign-right-bottom" style="border-color: var(--secondary-green);">
+      <div class="sign-discount-badge" style="background: var(--secondary-green);">КОМБО</div>
+      <img src="8cc0aac1-6865-43fe-bc51-94e339e5e629.jpg" onerror="handleImageError(this)" alt="Комбо набор мишка" onclick="openLightboxBySrc('8cc0aac1-6865-43fe-bc51-94e339e5e629.jpg', 'Комбо Набор «Милый Мишка»', 'Специальный комбо набор ручной работы с плюшевым медвежонком')">
+      <div class="sign-caption" style="color: var(--secondary-green);">🎁 КОМБО НАБОР</div>
+    </div>
+  </div>
+
+  <!-- НАВИГАЦИЯ С КАТАЛОГОМ И НОМЕРОМ / WHATSAPP -->
+  <nav class="navbar">
+    <div class="nav-left-group">
+      <a href="#" class="nav-logo">AURA FLOWERS</a>
+      
+      <div class="catalog-dropdown-wrapper">
+        <button class="catalog-btn">
+          <span>🌸</span> Каталог
+        </button>
+        <div class="catalog-mega-menu">
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Эустомы', 'Нежные эустомы в пышных охапках и авторских букетах.', 'фото1.jpg')">🌸 Эустомы</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Гортензии', 'Пышные гортензии пастельных и ярких тонов.', 'фоото 2.jpg')">🌺 Гортензии</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Георгины', 'Шикарные сортовые розовые георгины по специальной цене.', 'фото 3.jpg')">🌺 Георгины (Акция)</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Цветы в корзинах', 'Изысканные композиции в плетеных корзинах и шляпных коробках.', 'фото 4.jpg')">🧺 Композиции в корзинах</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Экзотика', 'Антуриумы, георгины, стрелиции и дизайнерская флористика.', 'фото 6.jpg')">🌿 Экзотика и декор</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Монобукеты', 'Роскошные гигантские монобукеты из пионов.', 'фото 7.jpg')">💐 Монобукеты</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Сертификаты', 'Эксклюзивные подарочные сертификаты студии.', 'фото 8.jpg')">💳 Подарочный сертификат</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Сборные миксы', 'Гармоничное сочетание сезонных цветов и декора.', 'фото 9.jpg')">🎁 Сборные композиции</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Клубника в шоколаде', 'Премиальные наборы свежей клубники в бельгийском шоколаде.', '08c1955d-c808-4d45-8294-04cb471429aa.jpg')">🍓 Клубника в шоколаде</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Плюшевые мишки', 'Мягкие игрушки ручной работы.', '8cc0aac1-6865-43fe-bc51-94e339e5e629.jpg')">🧸 Мягкие игрушки</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Букет с клубникой', 'Изысканные букеты с живыми розами и ягодами.', '14de41f8-69ac-4b2b-a33f-32f124185054.jpg')">🌹 Букеты с ягодами</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Буквы из шоколада', 'Подарочные наборы в форме букв с клубникой.', '465f1edd-2305-4627-aa97-5eabc732bd00.jpg')">❤️ Буквы из шоколада</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Корзины с ягодами', 'Плетеные корзины с цветами и клубникой в шоколаде.', 'a4b81690-67f9-4bd0-b594-8f2ddd65f725.jpg')">🧺 Корзины с клубникой</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Игрушки', 'Коллекционные мягкие мишки.', 'a84c4e65-952e-4d17-84de-9ed2a878dd52.jpg')">🧸 Плюшевые мишки</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Наборы Q', 'Эксклюзивные брендовые наборы.', 'ab50400a-feb1-4896-b231-d56fb0e62a4c.jpg')">🎁 Наборы Queenberry</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Овечки', 'Милые игрушки ручной работы.', 'bad6db3d-d0b2-4037-aec5-fdbae1121bdc.jpg')">🐑 Плюшевые овечки</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Барашки', 'Пушистые игрушки с колокольчиком.', 'bb496bad-1a76-432c-add6-4b5a4d7db38d.jpg')">🔔 Барашки с колокольчиком</a>
+          <a href="#" class="catalog-item" onclick="showInfo('Каталог: Корзина микс', 'Нежные розовые розы и клубника.', 'da3efdab-4bfa-48f2-8da0-858616ebf677.jpg')">🌸 Розы и Клубника</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-menu-links">
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">Покупателям ▾</a>
+        <div class="dropdown-menu">
+          <a href="#" onclick="showInfo('Свежесть гарантирована', 'Мы используем только свежесрезанные цветы и гарантируем их стойкость.')">Гарантия свежести</a>
+          <a href="#" onclick="showInfo('Правила ухода', 'Прилагаем подкормку для цветов и инструкцию к каждому букету.')">Инструкция по уходу</a>
+          <a href="#" onclick="showInfo('Доставка и вручение', 'Бережная и быстрая доставка по Алматы и Талдыкоргану.')">Доставка и вручение</a>
+          <a href="#" onclick="showInfo('Индивидуальный заказ', 'Сберем эксклюзивный букет по вашим пожеланиям и фото.')">Букет на заказ</a>
+        </div>
+      </div>
+
+      <a href="#" class="nav-link-item" onclick="showInfo('Оплата и доставка', 'Доступные способы оплаты: Kaspi QR, Halyk Bank или наличными при получении. Доставка по Алматы и Талдыкоргану от 60 минут.')">Оплата и доставка</a>
+      <a href="#" class="nav-link-item" onclick="openOrderStatusModal()">Статус доставки</a>
+    </div>
+
+    <div class="nav-right-area">
+      <div class="nav-contacts-block">
+        <a href="tel:+77006978385" class="nav-phone">📞 8 (700) 697-83-85</a>
+        <a href="https://wa.me/77006978385" target="_blank" class="nav-whatsapp-link">💬 Написать в WhatsApp</a>
+      </div>
+      
+      <div class="shop-actions">
+        <button class="action-icon-btn" title="Сравнение" onclick="showInfo('Сравнение', 'Список выбранных букетов пуст.')">
+          📊 <span class="badge-count" id="compare-count">0</span>
+        </button>
+        <button class="action-icon-btn" title="Избранное" onclick="openFavoritesModal()">
+          🤍 <span class="badge-count" id="fav-count">0</span>
+        </button>
+        <button class="action-icon-btn" title="Корзина" onclick="openCartModal()">
+          🛒 <span class="badge-count" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ШАПКА В СТИЛЕ ЛОГОТИПА -->
+  <header class="hero">
+    <div class="hero-brand-block">
+      <h1 class="hero-title">AURA FLOWERS</h1>
+      <p class="hero-subtitle">LUXURY FLORAL STUDIO • АЛМАТЫ & ТАЛДЫКОРГАН</p>
+      <p class="hero-tagline">«Эстетика живых цветов и сладких подарков в каждой детали»</p>
+    </div>
+
+    <div class="features-bar">
+      <div class="feature-item">Всегда свежие цветы</div>
+      <div class="feature-item">Фото букета перед отправкой</div>
+      <div class="feature-item">Экспресс-доставка от 60 мин</div>
+      <div class="feature-item">Оплата Kaspi, Halyk, Наличные</div>
+      <div class="feature-item">Бесплатная доставка от 20 000 ₸</div>
+    </div>
+  </header>
+
+  <!-- КАТАЛОГ ТОВАРОВ -->
+  <main class="portfolio-grid" id="product-grid">
+    <!-- Товары подгружаются автоматически скриптом -->
+  </main>
+
+  <!-- Модальное окно Корзины с моментальной оплатой -->
+  <div id="cartModal" class="custom-modal" onclick="closeModalOutside(event, 'cartModal')">
+    <div class="custom-modal-box">
+      <span class="modal-close-x" onclick="closeModal('cartModal')">&times;</span>
+      <h3>🛒 Корзина покупок</h3>
+      <div id="cart-items-container" style="margin-top: 15px;">
+        <p style="text-align: center; color: #777;">Ваша корзина пуста</p>
+      </div>
+      
+      <div class="payment-options" id="payment-options-block" style="display: none;">
+        <h4>💳 Выберите способ оплаты:</h4>
+        <label class="payment-label">
+          <input type="radio" name="paymentMethod" value="Kaspi" checked> Kaspi (QR / перевод)
+        </label>
+        <label class="payment-label">
+          <input type="radio" name="paymentMethod" value="Halyk"> Halyk Bank (Онлайн-оплата)
+        </label>
+        <label class="payment-label">
+          <input type="radio" name="paymentMethod" value="Наличные"> Наличными при получении
+        </label>
+      </div>
+
+      <div id="cart-total-block"></div>
+      <button class="submit-btn" id="checkout-btn" style="margin-top: 15px; display: none;" onclick="checkoutCart()">Оформить заказ и оплатить</button>
+    </div>
+  </div>
+
+  <!-- Модальное окно Избранного -->
+  <div id="favModal" class="custom-modal" onclick="closeModalOutside(event, 'favModal')">
+    <div class="custom-modal-box">
+      <span class="modal-close-x" onclick="closeModal('favModal')">&times;</span>
+      <h3>🤍 Избранные товары</h3>
+      <div id="fav-items-container" style="margin-top: 15px;">
+        <p style="text-align: center; color: #777;">В избранном пока ничего нет</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Лайтбокс для просмотра фото -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-arrow lightbox-prev" onclick="changeGlobalSlide(-1)">&#10094;</button>
+    <div class="lightbox-content">
+      <span class="lightbox-close" onclick="closeLightboxDirect()">&times;</span>
+      <img id="lightbox-img" src="" onerror="handleImageError(this)" alt="Фото товара">
+      <div class="lightbox-caption">
+        <h3 id="lightbox-title"></h3>
+        <p id="lightbox-desc"></p>
+      </div>
+    </div>
+    <button class="lightbox-arrow lightbox-next" onclick="changeGlobalSlide(1)">&#10095;</button>
+  </div>
+
+  <!-- Статус заказа -->
+  <div id="orderStatusModal" class="custom-modal" onclick="closeModalOutside(event, 'orderStatusModal')">
+    <div class="custom-modal-box">
+      <span class="modal-close-x" onclick="closeModal('orderStatusModal')">&times;</span>
+      <h3>Статус доставки</h3>
+      <p style="font-size: 0.9rem; color: #666;">Введите номер заказа или телефон:</p>
+      <input type="text" id="orderInput" placeholder="Пример: 11111 или +7 700 ...">
+      <button class="submit-btn" onclick="checkOrderStatus()">Узнать статус</button>
+    </div>
+  </div>
+
+  <!-- Инфо модалка -->
+  <div id="infoModal" class="custom-modal" onclick="closeModalOutside(event, 'infoModal')">
+    <div class="custom-modal-box">
+      <span class="modal-close-x" onclick="closeModal('infoModal')">&times;</span>
+      <h3 id="infoTitle">Информация</h3>
+      <img id="infoImg" src="" onerror="handleImageError(this)" alt="Фото товара">
+      <p id="infoText" style="font-size: 0.95rem; color: #444; line-height: 1.6;"></p>
+      <button class="submit-btn" onclick="closeModal('infoModal')" style="margin-top: 15px;">Понятно</button>
+    </div>
+  </div>
+
+  <footer>
+    <p><strong>AURA FLOWERS</strong> — Luxury Floral Studio (Алматы & Талдыкорган)</p>
+    <p>Телефон: 8 (700) 697-83-85 | WhatsApp: +7 (700) 697-83-85 | Instagram: @auraflowers_kz</p>
+  </footer>
+
+  <script>
+    const products = [
+      { id: 0, src: "фото1.jpg", title: "Охапка «Белоснежные Эустомы»", desc: "Роскошный объемный монобукет из сотен нежнейших белых эустом с бутонами.", price: 35000, priceText: "35 000 ₸", badge: "" },
+      { id: 1, src: "фоото 2.jpg", title: "Букет «Небесный Вальс» (Гортензии)", desc: "Изысканное сочетание голубых гортензий и ярко-малиновых кустовых роз в дизайне.", price: 28000, priceText: "28 000 ₸", badge: "" },
+      { id: 2, src: "фото 3.jpg", title: "Охапка «Розовые Георгины»", desc: "Шикарный монобукет из пышных сортовых георгин насыщенного розового оттенка.", price: 40000, priceText: "40 000 ₸", badge: "" },
+      { id: 3, src: "фото 4.jpg", title: "Корзина «Премиум Микс»", desc: "Авторская композиция из пионовидных роз, эустом и сезонных цветов в плетеней корзине.", price: 32000, priceText: "32 000 ₸", badge: "" },
+      { id: 4, src: "фото 6.jpg", title: "Композиция «Экзотик Стил»", desc: "Яркий авторский букет с экзотическими элементами и дизайнерским оформлением.", price: 25000, priceText: "25 000 ₸", badge: "" },
+      { id: 5, src: "фото 7.jpg", title: "Монобукет «Премиум Розы»", desc: "Элегантный гранд-монобукет из отборных сортовых роз в матовой упаковке.", price: 22000, priceText: "22 000 ₸", badge: "" },
+      { id: 6, src: "фото 8.jpg", title: "Подарочный сертификат", desc: "Фирменный подарочный сертификат студии AURA FLOWERS на любую сумму.", price: 15000, priceText: "15 000 ₸", badge: "" },
+      { id: 7, src: "фото 9.jpg", title: "Сборный микс «Авторский»", desc: "Гармоничное сочетание сезонных цветов, зелени и декоративных элементов.", price: 18000, priceText: "18 000 ₸", badge: "ХИТ" },
+      { id: 8, src: "08c1955d-c808-4d45-8294-04cb471429aa.jpg", title: "Премиум Бокс с Ягодами", desc: "Свежая клубника в бельгийском шоколаде с цветами в круглой коробке.", price: 24000, priceText: "24 000 ₸", badge: "АКЦИЯ" },
+      { id: 9, src: "8cc0aac1-6865-43fe-bc51-94e339e5e629.jpg", title: "Комбо Набор «Милый Мишка»", desc: "Плюшевый медвежонок ручной работы в стильном воротничке.", price: 12000, priceText: "12 000 ₸", badge: "КОМБО" },
+      { id: 10, src: "14de41f8-69ac-4b2b-a33f-32f124185054.jpg", title: "Букет «Ягодный Поцелуй»", desc: "Композиция из алых роз, кустовых цветов и клубники в шоколаде.", price: 29000, priceText: "29 000 ₸", badge: "" },
+      { id: 11, src: "465f1edd-2305-4627-aa97-5eabc732bd00.jpg", title: "Набор «LOVE» из Шоколада", desc: "Подарочная красная коробка с клубникой в шоколаде и ягодами.", price: 35000, priceText: "35 000 ₸", badge: "ХИТ" },
+      { id: 12, src: "a4b81690-67f9-4bd0-b594-8f2ddd65f725.jpg", title: "Корзина «Шоколадный Брис»", desc: "Плетненая корзина с пышными розами и обилием клубники в шоколаде.", price: 38000, priceText: "38 000 ₸", badge: "" },
+      { id: 13, src: "a84c4e65-952e-4d17-84de-9ed2a878dd52.jpg", title: "Плюшевые Мишки (Дуэт)", desc: "Два очаровательных мишки ручной работы с бусинками.", price: 18000, priceText: "18 000 ₸", badge: "" },
+      { id: 14, src: "ab50400a-feb1-4896-b231-d56fb0e62a4c.jpg", title: "Набор Queenberry Box", desc: "Эксклюзивный подарочный набор в большой розовой коробке с цветами и ягодами.", price: 42000, priceText: "42 000 ₸", badge: "LUXURY" },
+      { id: 15, src: "bad6db3d-d0b2-4037-aec5-fdbae1121bdc.jpg", title: "Плюшевые Овечки", desc: "Милые мягкие игрушки ручной работы с бархатным бантом.", price: 14000, priceText: "14 000 ₸", badge: "" },
+      { id: 16, src: "bb496bad-1a76-432c-add6-4b5a4d7db38d.jpg", title: "Барашек с Колокольчиком", desc: "Пушистая авторская игрушка с бубенчиком на шее.", price: 13000, priceText: "13 000 ₸", badge: "" },
+      { id: 17, src: "da3efdab-4bfa-48f2-8da0-858616ebf677.jpg", title: "Корзина «Нежность Роз»", desc: "Изысканная корзина с пастельными розами и ягодами в шоколаде.", price: 33000, priceText: "33 000 ₸", badge: "" }
+    ];
+
+    let cart = [];
+    let favorites = [];
+    let currentGlobalIndex = 0;
+
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = products.map((p, index) => {
+        const isFav = favorites.includes(p.id);
+        return `
+          <article class="project-card">
+            ${p.badge ? `<div class="promo-badge">${p.badge}</div>` : ''}
+            <button class="card-fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite(${p.id})" title="В избранное">
+              ${isFav ? '❤️' : '🤍'}
+            </button>
+            <div class="project-img-wrapper">
+              <img src="${p.src}" onerror="handleImageError(this)" alt="${p.title}" onclick="openLightbox(${index})">
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">${p.title}</h2>
+              <p class="project-desc">${p.desc}</p>
+              <div class="project-price-row">
+                <span class="project-price">${p.priceText}</span>
+                <button class="buy-btn" onclick="addToCart(${p.id})">В корзину</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function toggleFavorite(id) {
+      const idx = favorites.indexOf(id);
+      if (idx > -1) {
+        favorites.splice(idx, 1);
+      } else {
+        favorites.push(id);
+      }
+      document.getElementById('fav-count').innerText = favorites.length;
+      renderProducts();
+    }
+
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      cart.push(product);
+      document.getElementById('cart-count').innerText = cart.length;
+      alert(`Товар «${product.title}» добавлен в корзину!`);
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      document.getElementById('cart-count').innerText = cart.length;
+      openCartModal();
+    }
+
+    function removeFromFavorites(id) {
+      const idx = favorites.indexOf(id);
+      if (idx > -1) favorites.splice(idx, 1);
+      document.getElementById('fav-count').innerText = favorites.length;
+      renderProducts();
+      openFavoritesModal();
+    }
+
+    function openCartModal() {
+      const container = document.getElementById('cart-items-container');
+      const totalBlock = document.getElementById('cart-total-block');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      const paymentBlock = document.getElementById('payment-options-block');
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #777;">Ваша корзина пуста</p>';
+        totalBlock.innerHTML = '';
+        checkoutBtn.style.display = 'none';
+        paymentBlock.style.display = 'none';
+      } else {
+        let total = 0;
+        container.innerHTML = cart.map((item, idx) => {
+          total += item.price;
+          return `
+            <div class="cart-list-item">
+              <div class="cart-item-info">
+                <img src="${item.src}" onerror="handleImageError(this)">
+                <div>
+                  <div style="font-weight: 600; font-size: 0.9rem;">${item.title}</div>
+                  <div style="color: var(--secondary-green); font-size: 0.85rem;">${item.priceText}</div>
+                </div>
+              </div>
+              <button class="remove-item-btn" onclick="removeFromCart(${idx})" title="Удалить">🗑️</button>
+            </div>
+          `;
+        }).join('');
+
+        totalBlock.innerHTML = `<div class="cart-total">Итого: ${total.toLocaleString()} ₸</div>`;
+        paymentBlock.style.display = 'block';
+        checkoutBtn.style.display = 'block';
+      }
+      document.getElementById('cartModal').style.display = 'flex';
+    }
+
+    function openFavoritesModal() {
+      const container = document.getElementById('fav-items-container');
+      if (favorites.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #777;">В избранном пока ничего нет</p>';
+      } else {
+        const favProducts = products.filter(p => favorites.includes(p.id));
+        container.innerHTML = favProducts.map(item => `
+          <div class="fav-list-item">
+            <div class="cart-item-info">
+              <img src="${item.src}" onerror="handleImageError(this)">
+              <div>
+                <div style="font-weight: 600; font-size: 0.9rem;">${item.title}</div>
+                <div style="color: var(--secondary-green); font-size: 0.85rem;">${item.priceText}</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <button class="buy-btn" style="padding: 5px 10px; font-size: 0.75rem;" onclick="addToCart(${item.id}); removeFromFavorites(${item.id});">В корзину</button>
+              <button class="remove-item-btn" onclick="removeFromFavorites(${item.id})" title="Удалить">🗑️</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      document.getElementById('favModal').style.display = 'flex';
+    }
+
+    function checkoutCart() {
+      const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked').value;
+      
+      if (selectedPayment === 'Kaspi') {
+        alert('Перенаправление на Kaspi Pay / перевод для моментальной оплаты...');
+        window.location.href = 'https://pay.kaspi.kz';
+      } else if (selectedPayment === 'Halyk') {
+        alert('Перенаправление на защищенный шлюз Halyk Bank...');
+        window.location.href = 'https://halykbank.kz';
+      } else {
+        alert('Заказ успешно оформлен! Оплата наличными при получении. Менеджер свяжется с вами.');
+      }
+
+      cart = [];
+      document.getElementById('cart-count').innerText = 0;
+      closeModal('cartModal');
+    }
+
+    function showInfo(title, text, imgSrc = '') {
+      document.getElementById('infoTitle').innerText = title;
+      document.getElementById('infoText').innerText = text;
+      const infoImg = document.getElementById('infoImg');
+      if (imgSrc) {
+        delete infoImg.dataset.tried;
+        infoImg.src = imgSrc;
+        infoImg.style.display = 'block';
+      } else {
+        infoImg.style.display = 'none';
+        infoImg.src = '';
+      }
+      document.getElementById('infoModal').style.display = 'flex';
+    }
+
+    function openOrderStatusModal() {
+      document.getElementById('orderStatusModal').style.display = 'flex';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    function closeModalOutside(event, modalId) {
+      if (event.target.id === modalId) {
+        closeModal(modalId);
+      }
+    }
+
+    function checkOrderStatus() {
+      const input = document.getElementById('orderInput').value.trim();
+      if (!input) {
+        alert('Пожалуйста, введите номер заказа');
+        return;
+      }
+      closeModal('orderStatusModal');
+      showInfo('Статус заказа', 'Заказ #' + input + ' находится в сборке у флориста. Ожидаемое время доставки: в течение 60 минут.');
+    }
+
+    function openLightbox(index) {
+      currentGlobalIndex = index;
+      updateLightbox();
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function openLightboxBySrc(src, title, desc) {
+      const lbImg = document.getElementById('lightbox-img');
+      delete lbImg.dataset.tried;
+      lbImg.src = src;
+      document.getElementById('lightbox-title').innerText = title;
+      document.getElementById('lightbox-desc').innerText = desc;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function updateLightbox() {
+      const item = products[currentGlobalIndex];
+      const lbImg = document.getElementById('lightbox-img');
+      delete lbImg.dataset.tried;
+      lbImg.src = item.src;
+      document.getElementById('lightbox-title').innerText = item.title;
+      document.getElementById('lightbox-desc').innerText = item.desc;
+    }
+
+    function changeGlobalSlide(direction) {
+      currentGlobalIndex = (currentGlobalIndex + direction + products.length) % products.length;
+      updateLightbox();
+    }
+
+    function closeLightbox(event) {
+      if (event.target.id === 'lightbox') {
+        closeLightboxDirect();
+      }
+    }
+
+    function closeLightboxDirect() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    window.onload = function() {
+      renderProducts();
+    };
+  </script>
+</body>
+</html>
